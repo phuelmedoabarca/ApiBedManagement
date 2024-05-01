@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infraestructura", "Back\Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Back\Application\Application.csproj", "{0C8E5D7C-7E57-42C2-892E-7493438E9644}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementos de la solucion", "Elementos de la solucion", "{FDD2921D-2085-4191-A0E2-582448BE79D7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,7 +44,6 @@ Global
 		{ECAAD6DB-3F84-436A-9A90-3E5D507FFEE1} = {9B89D99E-F0B8-44EC-8D38-11C3E7819808}
 		{57E0CC95-F10E-4BA0-B55E-1A73AA94E1A3} = {9B89D99E-F0B8-44EC-8D38-11C3E7819808}
 		{0C8E5D7C-7E57-42C2-892E-7493438E9644} = {9B89D99E-F0B8-44EC-8D38-11C3E7819808}
-		{FDD2921D-2085-4191-A0E2-582448BE79D7} = {9B89D99E-F0B8-44EC-8D38-11C3E7819808}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {84E8DF6D-2103-49AB-BFAA-F27C43A3788D}
