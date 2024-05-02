@@ -36,6 +36,12 @@ namespace Infraestructura
                 .SingleOrDefaultAsync(i => i.Rut.Documento == rut);
             return usuario;
         }
+        public async Task<Usuario?> GetByEmailUsuario(string enail)
+        {
+            var usuario = await _dataBase.Set<Usuario>()
+                .SingleOrDefaultAsync(i => i.Email.Email == enail);
+            return usuario;
+        }
 
         public async Task<List<Usuario>> GetListUsuario()
         {

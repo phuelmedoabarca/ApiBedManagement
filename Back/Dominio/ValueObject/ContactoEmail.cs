@@ -17,7 +17,7 @@ namespace Domain.ValueObject
             {
                 throw new BadRequestException("Debe ingresar un Email valido.");
             }
-            Email = email;
+            Email = email.ToUpper();
         }
         private bool ValidateEmail(string email)
         {

@@ -28,16 +28,25 @@ namespace Domain.Entities
             if ((string.IsNullOrEmpty(nombre)) || (string.IsNullOrEmpty(contrasena)))
                 throw new BadRequestException("Debe ingresar todos los campos.");
 
-            var usuario = new Usuario(idUsuario, rut, nombre, contrasena, email, idRol);
+            byte[] contrasenaEncriptada = System.Text.Encoding.Unicode.GetBytes(contrasena);
+            var passwordEnctiptada = Convert.ToBase64String(contrasenaEncriptada);
+
+            var usuario = new Usuario(idUsuario, rut, nombre, passwordEnctiptada, email, idRol);
             usuario.FechaCreacion = DateTime.UtcNow;
 
             return usuario;
         }
         public void SetUsuario(string nombre, string contrasena, string email, Guid idRol)
         {
+            if ((string.IsNullOrEmpty(nombre)) || (string.IsNullOrEmpty(contrasena)))
+                throw new BadRequestException("Debe ingresar todos los campos.");
+
+            byte[] contrasenaEncriptada = System.Text.Encoding.Unicode.GetBytes(contrasena);
+            var passwordEnctiptada = Convert.ToBase64String(contrasenaEncriptada);
+
             var newEmail = new ContactoEmail(email);
             Nombre = nombre;
-            Contrasena = contrasena;
+            Contrasena = passwordEnctiptada;
             Email = newEmail;
             IdRol = idRol;
             FechaModificacion = DateTime.UtcNow;
