@@ -1,5 +1,4 @@
-﻿using Azure;
-using Domain.Excepcions;
+﻿using Domain.Excepcions;
 using System.Net;
 
 namespace Api.Extensions

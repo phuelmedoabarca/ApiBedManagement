@@ -1,11 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Repositorio;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infraestructura
 {
@@ -36,6 +31,13 @@ namespace Infraestructura
         public async Task<List<Paciente>> GetListPaciente()
         {
             return await _dataBase.Paciente.ToListAsync();
+        }
+
+        public async Task<Paciente?> GetByIdPaciente(Guid id)
+        {
+            var paciente = await _dataBase.Set<Paciente>()
+                            .SingleOrDefaultAsync(i => i.IdPaciente == id);
+            return paciente;
         }
     }
 }

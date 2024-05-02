@@ -1,16 +1,7 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Domain.Entities;
-using System.Reflection.Metadata;
 using Domain.ValueObject;
-using Infraestructura;
 using Domain.Repositorio;
-using Domain.Excepcions;
 
 namespace Application.Pacientes.Command.Create
 {

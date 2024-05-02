@@ -1,12 +1,7 @@
-﻿using Application.Pacientes.Command.Set;
-using Domain.Excepcions;
+﻿using Domain.Excepcions;
 using Domain.Repositorio;
+using Domain.ValueObject;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Usuarios.Command.Set
 {
@@ -22,14 +17,16 @@ namespace Application.Usuarios.Command.Set
 
         public async Task<UsuarioSetResponse> Handle(UsuarioSetCommand request, CancellationToken cancellationToken)
         {
+            var rut = new DocumentoIdentidad(request.Rut);
+            var usuario = await _repository.GetByRutUsuario(request.Rut);
+            if (usuario == null)
+                throw new NotFoundException($"usuario Rut:{request.Rut}");
+
             var roles = await _rolRepository.GetListRoles();
             var existRol = roles.FirstOrDefault(x => x.IdRol == request.IdRol);
             if (existRol == null)
                 throw new NotFoundException($"Rol:{request.IdRol}");
 
-            var usuario = await _repository.GetByRutUsuario(request.Rut);
-            if (usuario == null)
-                throw new NotFoundException($"usuario Rut:{request.Rut}");
             usuario.SetUsuario(request.Nombre, request.Contrasena, request.Email, request.IdRol);
             await _repository.SetUsuarioAsync(usuario);
 

@@ -1,9 +1,4 @@
 ﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Repositorio
 {
@@ -12,6 +7,7 @@ namespace Domain.Repositorio
         Task AddPacienteAsync(Paciente paciente);
         Task SetPacienteAsync(Paciente paciente);
         Task<Paciente?> GetByRutPaciente(string rut);
+        Task<Paciente?> GetByIdPaciente(Guid id);
         Task<List<Paciente>> GetListPaciente();
     }
 }

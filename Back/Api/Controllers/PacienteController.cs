@@ -4,7 +4,6 @@ using Application.Pacientes.Queries.GetByRutPaciente;
 using Application.Pacientes.Queries.GetList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 
 namespace Api.Controllers
 {

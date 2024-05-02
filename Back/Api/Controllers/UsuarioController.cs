@@ -1,6 +1,5 @@
-﻿using Application.Pacientes.Queries.GetByRutPaciente;
-using Application.Pacientes.Queries.GetList;
-using Application.Usuarios.Command.Create;
+﻿using Application.Usuarios.Command.Create;
+using Application.Usuarios.Command.Delete;
 using Application.Usuarios.Command.Set;
 using Application.Usuarios.Queries.GetByRutUsuario;
 using Application.Usuarios.Queries.GetList;
@@ -28,6 +27,12 @@ namespace Api.Controllers
         public async Task<ActionResult> ModifyUsuario(UsuarioSetCommand request)
         {
             var result = await _mediator.Send(request);
+            return StatusCode(StatusCodes.Status200OK, result);
+        }
+        [HttpDelete("rut")]
+        public async Task<ActionResult> DeleteUsuario(string rut)
+        {
+            var result = await _mediator.Send(new UsuarioDeleteCommand() { Rut = rut});
             return StatusCode(StatusCodes.Status200OK, result);
         }
         [HttpGet()]

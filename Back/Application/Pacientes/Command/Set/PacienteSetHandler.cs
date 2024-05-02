@@ -1,13 +1,7 @@
-﻿using Application.Pacientes.Command.Create;
-using Domain.Entities;
-using Domain.Excepcions;
+﻿using Domain.Excepcions;
 using Domain.Repositorio;
+using Domain.ValueObject;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Pacientes.Command.Set
 {
@@ -21,6 +15,7 @@ namespace Application.Pacientes.Command.Set
 
         public async Task<PacienteSetResponse> Handle(PacienteSetCommand request, CancellationToken cancellationToken)
         {
+            var rut = new DocumentoIdentidad(request.Rut);
             var paciente = await _repository.GetByRutPaciente(request.Rut);
             if (paciente == null)
                 throw new NotFoundException($"paciente Rut:{request.Rut}");

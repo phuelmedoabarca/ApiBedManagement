@@ -1,11 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Repositorio;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infraestructura
 {
@@ -22,6 +17,19 @@ namespace Infraestructura
             await _dataBase.SaveChangesAsync();
         }
 
+        public async Task DeleteByRutUsuarioAsync(Usuario usuario)
+        {
+            _dataBase.Set<Usuario>().Remove(usuario);
+            await _dataBase.SaveChangesAsync();
+        }
+
+        public async Task<Usuario?> GetByIdUsuario(Guid id)
+        {
+            var usuario = await _dataBase.Set<Usuario>()
+                                    .SingleOrDefaultAsync(i => i.IdUsuario == id);
+            return usuario;
+        }
+
         public async Task<Usuario?> GetByRutUsuario(string rut)
         {
             var usuario = await _dataBase.Set<Usuario>()
@@ -29,9 +37,9 @@ namespace Infraestructura
             return usuario;
         }
 
-        public Task<List<Usuario>> GetListUsuario()
+        public async Task<List<Usuario>> GetListUsuario()
         {
-            throw new NotImplementedException();
+            return await _dataBase.Usuario.ToListAsync();
         }
 
         public async Task SetUsuarioAsync(Usuario usuario)

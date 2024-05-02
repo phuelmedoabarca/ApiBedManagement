@@ -15,4 +15,9 @@
     <ProjectReference Include="..\Infraestructura\Infraestructura.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Ingresos\Command\Set\" />
+    <Folder Include="Ingresos\Queries\" />
+  </ItemGroup>
+
 </Project>

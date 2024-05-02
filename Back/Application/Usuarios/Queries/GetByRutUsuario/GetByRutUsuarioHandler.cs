@@ -1,14 +1,8 @@
-﻿using Application.Usuarios.Queries.GetList;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Excepcions;
 using Domain.Repositorio;
 using Domain.ValueObject;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Usuarios.Queries.GetByRutUsuario
 {

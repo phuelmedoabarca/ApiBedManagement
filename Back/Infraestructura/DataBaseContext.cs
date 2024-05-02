@@ -16,6 +16,7 @@ namespace Infraestructura
         public DbSet<UsuarioRol> UsuarioRol { get; set; }
         public DbSet<Paciente> Paciente { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Ingreso> Ingreso { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Unidad>(o =>
@@ -87,6 +88,20 @@ namespace Infraestructura
                 o.Property(x => x.FechaCreacion);
                 o.Property(x => x.FechaModificacion);
                 o.Property(x => x.IdRol);
+            });
+            modelBuilder.Entity<Ingreso>(o =>
+            {
+                o.HasKey(x => x.IdIngreso);
+                o.Property(x => x.IdIngreso);
+                o.Property(x => x.Sintomas);
+                o.Property(x => x.Diagnostico);
+                o.Property(x => x.IdPaciente);
+                o.Property(x => x.IdEstado);
+                o.Property(x => x.IdUnidad);
+                o.Property(x => x.IdCama);
+                o.Property(x => x.FechaAlta);
+                o.Property(x => x.FechaCreacion);
+                o.Property(x => x.FechaModificacion);
             });
             base.OnModelCreating(modelBuilder);
         }

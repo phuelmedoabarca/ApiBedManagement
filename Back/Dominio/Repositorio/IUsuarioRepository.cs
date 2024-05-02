@@ -1,9 +1,4 @@
 ﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Repositorio
 {
@@ -11,7 +6,9 @@ namespace Domain.Repositorio
     {
         Task AddUsuarioAsync(Usuario usuario);
         Task SetUsuarioAsync(Usuario usuario);
+        Task DeleteByRutUsuarioAsync(Usuario usuario);
         Task<Usuario?> GetByRutUsuario(string rut);
+        Task<Usuario?> GetByIdUsuario(Guid id);
         Task<List<Usuario>> GetListUsuario();
     }
 }

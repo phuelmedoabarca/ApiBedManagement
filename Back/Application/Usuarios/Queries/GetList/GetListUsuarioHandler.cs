@@ -1,12 +1,6 @@
-﻿using Application.Pacientes.Queries.GetList;
-using Domain.Entities;
+﻿using Domain.Entities;
 using Domain.Repositorio;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Usuarios.Queries.GetList
 {
