@@ -12,7 +12,7 @@ namespace Api.Controllers
         {
             _repository = repository;
         }
-        [HttpGet("{unidadId}")]
+        [HttpGet("unidadId")]
         public async Task<ActionResult> GetSalas(int unidadId)
         {
             var response = await _repository.GetListByUnidad(unidadId);
