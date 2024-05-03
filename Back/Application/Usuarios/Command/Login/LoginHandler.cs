@@ -27,8 +27,7 @@ namespace Application.Usuarios.Command.Login
             if (usuario is null)
                 throw new NotFoundException($"usuario Email:{request.Email}");
 
-            byte[] contrasenaEncriptada = System.Text.Encoding.Unicode.GetBytes(request.Contrasena);
-            var passwordEnctiptada = Convert.ToBase64String(contrasenaEncriptada);
+            var passwordEnctiptada = usuario.ValidPassword(request.Contrasena);
             if (passwordEnctiptada != usuario.Contrasena)
                 throw new BadRequestException("Contraseña no valida.");
 

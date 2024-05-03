@@ -7,6 +7,10 @@ namespace Domain.Entities
         public int Numero { get; }
         public string Sexo { get; }
         public int IdSala { get; }
-        public int IdEstadoCama { get; }
+        public int IdEstadoCama { get; set; }
+        public void SetEstadoCama(int idEstadoCama)
+        {
+            IdEstadoCama = idEstadoCama;
+        }
     }
 }

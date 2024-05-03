@@ -20,13 +20,18 @@ namespace Infraestructura
         public async Task<Ingreso?> GetByIdIngreso(Guid id)
         {
             var ingreso = await _dataBase.Set<Ingreso>()
+                            .Include(i => i.Paciente)
                             .SingleOrDefaultAsync(i => i.IdIngreso == id);
             return ingreso;
         }
 
-        public async Task<List<Ingreso>> GetListIngreso()
+        public async Task<List<Ingreso>> GetListIngreso(int idEstado)
         {
-            return await _dataBase.Ingreso.ToListAsync();
+            var ingresos = await _dataBase.Set<Ingreso>()
+                                            .Where(i => i.IdEstado == idEstado)
+                                            .Include(i => i.Paciente) 
+                                            .ToListAsync();
+            return ingresos;
         }
 
         public async Task SetIngresoAsync(Ingreso ingreso)

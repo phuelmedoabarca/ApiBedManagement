@@ -95,7 +95,10 @@ namespace Infraestructura
                 o.Property(x => x.IdIngreso);
                 o.Property(x => x.Sintomas);
                 o.Property(x => x.Diagnostico);
-                o.Property(x => x.IdPaciente);
+                o.HasOne(i => i.Paciente)
+                              .WithMany()
+                              .HasForeignKey(i => i.IdPaciente)
+                              ;
                 o.Property(x => x.IdEstado);
                 o.Property(x => x.IdUnidad);
                 o.Property(x => x.IdCama);
