@@ -25,7 +25,7 @@ namespace Application.Usuarios.Command.Login
             var email = new ContactoEmail(request.Email);
             var usuario = await _repository.GetByEmailUsuario(email.Email);
             if (usuario is null)
-                throw new NotFoundException($"usuario Email:{request.Email}");
+                throw new NotFoundException($"usuario email: {request.Email}.");
 
             var passwordEnctiptada = usuario.ValidPassword(request.Contrasena);
             if (passwordEnctiptada != usuario.Contrasena)

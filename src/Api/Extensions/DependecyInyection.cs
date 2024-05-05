@@ -10,6 +10,7 @@ using Application.Usuarios.Command.Create;
 using Application.Usuarios.Command.Delete;
 using Application.Usuarios.Command.Login;
 using Application.Usuarios.Command.Set;
+using Application.Usuarios.Queries.GetByFiltersUsuario;
 using Application.Usuarios.Queries.GetByRutUsuario;
 using Application.Usuarios.Queries.GetList;
 using Domain.Entities;
@@ -44,6 +45,7 @@ namespace Api.Extensions
             services.AddScoped<IRequestHandler<LoginCommand, LoginResponse>, LoginHandler>();
             services.AddScoped<IRequestHandler<GetListUsuarioQuery, List<Usuario>>, GetListUsuarioHandler>();
             services.AddScoped<IRequestHandler<GetByRutUsuarioQuery, Usuario>, GetByRutUsuarioHandler>();
+            services.AddScoped<IRequestHandler<GetByFilterUsuarioQuery, List<Usuario>>, GetByFilterUsuarioHandler>();
             services.AddScoped<IRequestHandler<IngresoCreateCommand, IngresoCreateResponse>, IngresoCreateHandler>();
             services.AddScoped<IRequestHandler<IngresoSetCommand, IngresoSetResponse>, IngresoSetHandler>();
             services.AddScoped<IRequestHandler<GetByIdIngresoQuery, Ingreso>, GetByIdIngresoHandler>();

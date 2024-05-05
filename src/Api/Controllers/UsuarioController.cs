@@ -1,9 +1,11 @@
 ﻿using Application.Usuarios.Command.Create;
 using Application.Usuarios.Command.Delete;
 using Application.Usuarios.Command.Set;
+using Application.Usuarios.Queries.GetByFiltersUsuario;
 using Application.Usuarios.Queries.GetByRutUsuario;
 using Application.Usuarios.Queries.GetList;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -45,6 +47,12 @@ namespace Api.Controllers
         public async Task<ActionResult> GetByRutUsuario(string rut)
         {
             var result = await _mediator.Send(new GetByRutUsuarioQuery() { Rut = rut });
+            return StatusCode(StatusCodes.Status200OK, result);
+        }
+        [HttpGet("rut/nombre")]
+        public async Task<ActionResult> GetByFiltersUsuario(string? rut, string? nombre)
+        {
+            var result = await _mediator.Send(new GetByFilterUsuarioQuery() { Rut = rut, Nombre = nombre });
             return StatusCode(StatusCodes.Status200OK, result);
         }
     }

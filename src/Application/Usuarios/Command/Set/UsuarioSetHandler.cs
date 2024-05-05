@@ -25,7 +25,10 @@ namespace Application.Usuarios.Command.Set
             var roles = await _rolRepository.GetListRoles();
             var existRol = roles.FirstOrDefault(x => x.IdRol == request.IdRol);
             if (existRol == null)
-                throw new NotFoundException($"Rol:{request.IdRol}");
+                throw new NotFoundException($"rol: {request.IdRol}");
+
+            if (request.Contrasena.Length < 6)
+                throw new BadRequestException("Contraseña debe tener minimo 6 caracteres.");
 
             usuario.SetUsuario(request.Nombre, request.Contrasena, request.Email, request.IdRol);
             await _repository.SetUsuarioAsync(usuario);
@@ -33,6 +36,7 @@ namespace Application.Usuarios.Command.Set
             return new UsuarioSetResponse()
             {
                 Id = usuario.IdUsuario,
+                Message = "Usuario modificado exitosamente.",
                 FechaModificacion = usuario.FechaModificacion
             };
         }

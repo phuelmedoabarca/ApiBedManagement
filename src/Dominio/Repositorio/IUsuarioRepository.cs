@@ -11,5 +11,6 @@ namespace Domain.Repositorio
         Task<Usuario?> GetByEmailUsuario(string email);
         Task<Usuario?> GetByIdUsuario(Guid id);
         Task<List<Usuario>> GetListUsuario();
+        Task<List<Usuario>> GetListUsuarioWhitFilters(string rut, string nombre);
     }
 }

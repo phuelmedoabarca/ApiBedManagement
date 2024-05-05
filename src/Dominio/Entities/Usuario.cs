@@ -25,6 +25,7 @@ namespace Domain.Entities
         public DateTime FechaCreacion { get; set; }
         public DateTime? FechaModificacion { get; set; }
         public Guid IdRol { get; set; }
+        public UsuarioRol Rol { get; set; }
         public static Usuario Create(Guid idUsuario, DocumentoIdentidad rut, string nombre, string contrasena, ContactoEmail email, Guid idRol) 
         {
             if ((string.IsNullOrEmpty(nombre)) || (string.IsNullOrEmpty(contrasena)))

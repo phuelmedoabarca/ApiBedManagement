@@ -18,6 +18,7 @@ namespace Domain.ValueObject
             {
                 throw new BadRequestException("Debe ingresar un Rut valido.");
             }
+            rut = rut.Replace(".", "");
             Documento = rut;
         }
         private bool ValidarRut(string rut)

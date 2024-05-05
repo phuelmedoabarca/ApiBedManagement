@@ -87,7 +87,10 @@ namespace Infraestructura
                 });
                 o.Property(x => x.FechaCreacion);
                 o.Property(x => x.FechaModificacion);
-                o.Property(x => x.IdRol);
+                o.HasOne(i => i.Rol)
+                              .WithMany()
+                              .HasForeignKey(i => i.IdRol);
+
             });
             modelBuilder.Entity<Ingreso>(o =>
             {
@@ -97,8 +100,7 @@ namespace Infraestructura
                 o.Property(x => x.Diagnostico);
                 o.HasOne(i => i.Paciente)
                               .WithMany()
-                              .HasForeignKey(i => i.IdPaciente)
-                              ;
+                              .HasForeignKey(i => i.IdPaciente);
                 o.Property(x => x.IdEstado);
                 o.Property(x => x.IdUnidad);
                 o.Property(x => x.IdCama);

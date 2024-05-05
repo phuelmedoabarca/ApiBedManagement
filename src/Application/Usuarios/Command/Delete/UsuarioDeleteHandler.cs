@@ -24,6 +24,7 @@ namespace Application.Usuarios.Command.Delete
             return new UsuarioDeleteResponse()
             {
                 Id = usuario.IdUsuario,
+                Message = "Usuario eliminado exitosamente.",
                 FechaEliminacion = DateTime.UtcNow
             };
         }

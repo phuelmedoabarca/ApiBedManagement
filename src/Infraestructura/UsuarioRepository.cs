@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Domain.Repositorio;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Infraestructura
 {
@@ -45,7 +46,31 @@ namespace Infraestructura
 
         public async Task<List<Usuario>> GetListUsuario()
         {
-            return await _dataBase.Usuario.ToListAsync();
+            var usuarios = await _dataBase.Set<Usuario>()
+                                .Include(i => i.Rol)
+                                .ToListAsync();
+            return usuarios;
+
+        }
+        public async Task<List<Usuario>> GetListUsuarioWhitFilters(string rut, string nombre)
+        {
+            var query = _dataBase.Set<Usuario>()
+                                .Include(i => i.Rol)
+                                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(rut))
+            {
+                query = query.Where(x => x.Rut.Documento.Contains(rut));
+            }
+
+            if (!string.IsNullOrEmpty(nombre))
+            {
+                query = query.Where(x => x.Nombre.Contains(nombre));
+            }
+
+            var usuarios = await query.ToListAsync();
+            return usuarios;
+
         }
 
         public async Task SetUsuarioAsync(Usuario usuario)
