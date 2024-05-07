@@ -1,13 +1,21 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Infraestructura
 {
     public class DataBaseContext : DbContext
     {
-        public DataBaseContext(DbContextOptions<DataBaseContext> options):base(options)
-        { 
-        
+        private readonly ILogger<DataBaseContext> _logger;
+        public DataBaseContext(DbContextOptions<DataBaseContext> options, ILogger<DataBaseContext> logger) :base(options)
+        {
+            _logger = logger;
+            LogConnectionString();
+        }
+        private void LogConnectionString()
+        {
+            var connectionString = Database.GetConnectionString();
+            _logger.LogInformation("Cadena de conexión utilizada: {ConnectionString}", connectionString);
         }
         public DbSet<Unidad> Unidad { get; set; }
         public DbSet<Sala> Sala { get; set; }
