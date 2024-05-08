@@ -15,10 +15,12 @@ namespace Application.Usuarios.Command.Login
     {
         private readonly IUsuarioRepository _repository;
         private readonly IConfiguration _configuration;
-        public LoginHandler(IUsuarioRepository repository, IConfiguration configuration)
+        private readonly IMediator _mediator;
+        public LoginHandler(IUsuarioRepository repository, IConfiguration configuration, IMediator mediator)
         {
             _repository = repository;
             _configuration = configuration;
+            _mediator = mediator;
         }
         public async Task<LoginResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
