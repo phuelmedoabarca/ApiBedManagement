@@ -1,13 +1,21 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Infraestructura
 {
     public class DataBaseContext : DbContext
     {
-        public DataBaseContext(DbContextOptions<DataBaseContext> options):base(options)
-        { 
-        
+        private readonly ILogger<DataBaseContext> _logger;
+        public DataBaseContext(DbContextOptions<DataBaseContext> options, ILogger<DataBaseContext> logger) :base(options)
+        {
+            _logger = logger;
+            LogConnectionString();
+        }
+        private void LogConnectionString()
+        {
+            var connectionString = Database.GetConnectionString();
+            _logger.LogInformation("Cadena de conexión utilizada: {ConnectionString}", connectionString);
         }
         public DbSet<Unidad> Unidad { get; set; }
         public DbSet<Sala> Sala { get; set; }
@@ -38,7 +46,9 @@ namespace Infraestructura
                 o.Property(x => x.IdCama);
                 o.Property(x => x.Numero);
                 o.Property(x => x.Sexo);
-                o.Property(x => x.IdSala);
+                o.HasOne(x => x.Sala)
+                                .WithMany()
+                                .HasForeignKey(x => x.IdSala);
                 o.Property(x => x.IdEstadoCama);
             });
             modelBuilder.Entity<Comuna>(o =>
@@ -103,6 +113,9 @@ namespace Infraestructura
                               .HasForeignKey(i => i.IdPaciente);
                 o.Property(x => x.IdEstado);
                 o.Property(x => x.IdUnidad);
+                o.HasOne(i => i.Unidad)
+                              .WithMany()
+                              .HasForeignKey(i => i.IdUnidad);
                 o.Property(x => x.IdCama);
                 o.Property(x => x.FechaAlta);
                 o.Property(x => x.FechaCreacion);

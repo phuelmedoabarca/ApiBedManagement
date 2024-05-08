@@ -26,6 +26,14 @@ namespace Infraestructura
                            .ToListAsync();
             return camas;
         }
+        public async Task<int> GetCountCamasByUnidad(int idUnidad)
+        {
+            var count = await _dataBase.Set<Cama>()
+                                            .Include(i => i.Sala)
+                                            .Where(i => i.Sala.IdUnidad == idUnidad && i.IdEstadoCama == 1)
+                                            .ToListAsync();
+            return count.Count();
+        }
         public async Task SetEstadoCamaAsync(Cama cama)
         {
             _dataBase.Set<Cama>().Update(cama);

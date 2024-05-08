@@ -7,5 +7,6 @@ namespace Domain.Repositorio
         Task<List<Cama>> GetListBySala(int idSala);
         Task<Cama?> GetById(int? idCama);
         Task SetEstadoCamaAsync(Cama cama);
+        Task<int> GetCountCamasByUnidad(int idUnidad);
     }
 }

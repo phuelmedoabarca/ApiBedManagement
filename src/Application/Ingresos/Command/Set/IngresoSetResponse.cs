@@ -9,6 +9,7 @@ namespace Application.Ingresos.Command.Set
     public class IngresoSetResponse
     {
         public Guid Id { get; set; }
+        public string Message { get; set; }
         public DateTime? FechaModificacion { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace Domain.Entities
         public int IdEstado { get; set; }
         public int? IdCama { get; set; }
         public int? IdUnidad { get; set; }
+        public Unidad? Unidad { get; set; }
         public static Ingreso Create(Guid id, string sintomas, Guid idPaciente, Guid idUsuario)
         {
             var ingreso = new Ingreso(id, sintomas, idPaciente, idUsuario);

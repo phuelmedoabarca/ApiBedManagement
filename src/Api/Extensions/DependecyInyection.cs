@@ -1,5 +1,6 @@
 ﻿using Application.Ingresos.Command.Create;
 using Application.Ingresos.Command.Set;
+using Application.Ingresos.Queries.GetByFiltersIngreso;
 using Application.Ingresos.Queries.GetByIdIngreso;
 using Application.Ingresos.Queries.GetList;
 using Application.Pacientes.Command.Create;
@@ -50,6 +51,7 @@ namespace Api.Extensions
             services.AddScoped<IRequestHandler<IngresoSetCommand, IngresoSetResponse>, IngresoSetHandler>();
             services.AddScoped<IRequestHandler<GetByIdIngresoQuery, Ingreso>, GetByIdIngresoHandler>();
             services.AddScoped<IRequestHandler<GetListIngresoQuery, List<Ingreso>>, GetListIngresoHandler>();
+            services.AddScoped<IRequestHandler<GetByFilterIngresoQuery, List<Ingreso>>, GetByFilterIngresoHandler>();
         }
     }
 }

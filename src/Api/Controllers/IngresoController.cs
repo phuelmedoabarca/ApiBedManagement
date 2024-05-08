@@ -1,5 +1,6 @@
 ﻿using Application.Ingresos.Command.Create;
 using Application.Ingresos.Command.Set;
+using Application.Ingresos.Queries.GetByFiltersIngreso;
 using Application.Ingresos.Queries.GetByIdIngreso;
 using Application.Ingresos.Queries.GetList;
 using Application.Pacientes.Queries.GetByRutPaciente;
@@ -30,10 +31,10 @@ namespace Api.Controllers
             var result = await _mediator.Send(request);
             return StatusCode(StatusCodes.Status200OK, result);
         }
-        [HttpGet("idEstado")]
-        public async Task<ActionResult> GetIngresos(int idEstado)
+        [HttpGet()]
+        public async Task<ActionResult> GetIngresos()
         {
-            var result = await _mediator.Send(new GetListIngresoQuery() { IdEstado = idEstado });
+            var result = await _mediator.Send(new GetListIngresoQuery());
             return StatusCode(StatusCodes.Status200OK, result);
         }
         [HttpGet("idIngreso")]
@@ -41,6 +42,19 @@ namespace Api.Controllers
         {
             var result = await _mediator.Send(new GetByIdIngresoQuery() { IdIngreso = idIngreso });
             return StatusCode(StatusCodes.Status200OK, result);
+        }
+        [HttpGet("rut/nombre")]
+        public async Task<ActionResult> GetByFiltersIngreso(string? rut, string? nombre)
+        {
+            var result = await _mediator.Send(new GetByFilterIngresoQuery() { Rut = rut, Nombre = nombre });
+            return StatusCode(StatusCodes.Status200OK, result);
+        }
+        [HttpGet("counter")]
+        public async Task<ActionResult> CounterIngresosPendientes()
+        {
+            var result = await _mediator.Send(new GetListIngresoQuery());
+            var count = result.Count(ingreso => ingreso.IdEstado == 2);
+            return StatusCode(StatusCodes.Status200OK, count);
         }
     }
 }

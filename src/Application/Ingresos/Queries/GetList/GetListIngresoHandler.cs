@@ -13,7 +13,7 @@ namespace Application.Ingresos.Queries.GetList
         }
         public async Task<List<Ingreso>> Handle(GetListIngresoQuery request, CancellationToken cancellationToken)
         {
-            var ingreso = await _repository.GetListIngreso(request.IdEstado);
+            var ingreso = await _repository.GetListIngreso();
             return ingreso;
         }
     }

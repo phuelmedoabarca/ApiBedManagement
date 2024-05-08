@@ -55,6 +55,7 @@ namespace Application.Ingresos.Command.Set
             return new IngresoSetResponse()
             {
                 Id = ingreso.IdIngreso,
+                Message = "Paciente modificado exitosamente",
                 FechaModificacion = ingreso.FechaModificacion
             };
         }

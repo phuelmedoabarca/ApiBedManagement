@@ -25,12 +25,33 @@ namespace Infraestructura
             return ingreso;
         }
 
-        public async Task<List<Ingreso>> GetListIngreso(int idEstado)
+        public async Task<List<Ingreso>> GetListIngreso()
         {
             var ingresos = await _dataBase.Set<Ingreso>()
-                                            .Where(i => i.IdEstado == idEstado)
                                             .Include(i => i.Paciente) 
+                                            .Include(i => i.Unidad)
                                             .ToListAsync();
+            return ingresos;
+        }
+
+        public async Task<List<Ingreso>> GetListIngresoWhitFilters(string rut, string nombre)
+        {
+            var query = _dataBase.Set<Ingreso>()
+                    .Include(i => i.Paciente)
+                    .Include(i => i.Unidad)
+                    .AsQueryable();
+
+            if (!string.IsNullOrEmpty(rut))
+            {
+                query = query.Where(x => x.Paciente.Rut.Documento.Contains(rut));
+            }
+
+            if (!string.IsNullOrEmpty(nombre))
+            {
+                query = query.Where(x => x.Paciente.Nombre.Contains(nombre));
+            }
+
+            var ingresos = await query.ToListAsync();
             return ingresos;
         }
 

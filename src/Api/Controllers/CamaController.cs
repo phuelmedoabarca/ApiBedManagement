@@ -18,5 +18,11 @@ namespace Api.Controllers
             var response = await _repository.GetListBySala(salaId);
             return Ok(response);
         }
+        [HttpGet("unidadId")]
+        public async Task<ActionResult> GetCamasByUnidad(int unidadId)
+        {
+            var response = await _repository.GetCountCamasByUnidad(unidadId);
+            return Ok(response);
+        }
     }
 }
