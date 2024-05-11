@@ -6,9 +6,11 @@ namespace Domain.ValueObject
     public class DocumentoIdentidad
     {
         public DocumentoIdentidad() { }
-        public string Documento { get; private set; }
+        public int Documento { get; private set; }
+        public string Digito { get; private set; }
         public DocumentoIdentidad(string rut)
         {
+
             ValidarRut(rut);
             if (string.IsNullOrEmpty(rut))
             {
@@ -18,8 +20,6 @@ namespace Domain.ValueObject
             {
                 throw new BadRequestException("Debe ingresar un Rut valido.");
             }
-            rut = rut.Replace(".", "");
-            Documento = rut;
         }
         private bool ValidarRut(string rut)
         {
@@ -27,11 +27,16 @@ namespace Domain.ValueObject
             {
                 rut = rut.Replace(".", "").ToUpper();
                 var expresion = new Regex("^([0-9]+-[0-9K])$");
-                var dv = rut.Substring(rut.Length - 1, 1);
-                if (!expresion.IsMatch(rut)) return false;
-                char[] charCorte = { '-' };
-                var rutTemp = rut.Split(charCorte);
-                return dv == Digit(int.Parse(rutTemp[0]));
+                if (!expresion.IsMatch(rut))
+                    return false;
+                var rutParts = rut.Split('-');
+                if (rutParts.Length != 2)
+                    return false;
+                if (!int.TryParse(rutParts[0], out int documento))
+                    return false;
+                Documento = documento;
+                Digito = rutParts[1];
+                return Digito == Digit(Documento);
             }
             catch (Exception)
             {

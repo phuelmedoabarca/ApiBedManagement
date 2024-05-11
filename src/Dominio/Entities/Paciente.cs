@@ -6,11 +6,13 @@ namespace Domain.Entities
     public class Paciente
     {
         public Paciente() { }
-        public Paciente(Guid id, DocumentoIdentidad rut, string nombre, string sexo, string direccion, string alergias, int celular, DateTime fechaNacimiento, int idComuna) 
+        public Paciente(Guid id, DocumentoIdentidad rut, string nombre, string apellidoPaterno, string apellidoMaterno, string sexo, string direccion, string alergias, int celular, DateTime fechaNacimiento, int idComuna) 
         {
             IdPaciente = id;
             Rut = rut;
             Nombre = nombre;
+            ApellidoPaterno = apellidoPaterno;
+            ApellidoMaterno = apellidoMaterno;
             Sexo = sexo;
             Direccion = direccion;
             Alergias = alergias;
@@ -21,6 +23,8 @@ namespace Domain.Entities
         public Guid IdPaciente { get; set; }
         public DocumentoIdentidad Rut { get; set; }
         public string Nombre { get; set; }
+        public string ApellidoPaterno { get; set; }
+        public string? ApellidoMaterno { get; set; }
         public string Sexo { get; set; }
         public string Direccion { get; set; }
         public string Alergias { get; set; }
@@ -29,12 +33,12 @@ namespace Domain.Entities
         public DateTime? FechaModificacion { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public int IdComuna { get; set; }
-        public static Paciente Create(Guid id, DocumentoIdentidad rut, string nombre, string sexo, string direccion, string alergias, int celular, DateTime fechaNacimiento, int idComuna)
+        public static Paciente Create(Guid id, DocumentoIdentidad rut, string nombre, string apellidoPaterno, string apellidoMaterno, string sexo, string direccion, string alergias, int celular, DateTime fechaNacimiento, int idComuna)
         {
-            if((string.IsNullOrEmpty(nombre)) || (string.IsNullOrEmpty(sexo)) || (string.IsNullOrEmpty(direccion)) || celular.ToString().Length != 9)
+            if((string.IsNullOrEmpty(nombre)) || (string.IsNullOrEmpty(apellidoPaterno)) || (string.IsNullOrEmpty(sexo)) || (string.IsNullOrEmpty(direccion)) || celular.ToString().Length != 9)
                 throw new BadRequestException("Debe ingresar todos los campos.");
 
-            var paciente = new Paciente(id, rut, nombre, sexo, direccion, alergias, celular, fechaNacimiento, idComuna);
+            var paciente = new Paciente(id, rut, nombre, apellidoPaterno, apellidoMaterno, sexo, direccion, alergias, celular, fechaNacimiento, idComuna);
             paciente.FechaCreacion = DateTime.UtcNow;
 
             return paciente;

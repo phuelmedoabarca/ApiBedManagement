@@ -26,7 +26,7 @@ namespace Application.Pacientes.Command.Create
         public async Task<Paciente> CreatePaciente(PacienteCreateCommand request)
         {
             var rut = new DocumentoIdentidad(request.Rut);
-            var paciente = Paciente.Create(Guid.NewGuid(), rut, request.Nombre, request.Sexo.ToUpper(), request.Direccion, request.Alergias, request.Celular, request.FechaNacimiento, request.IdComuna);
+            var paciente = Paciente.Create(Guid.NewGuid(), rut, request.Nombre, request.ApellidoPaterno, request.ApellidoMaterno, request.Sexo.ToUpper(), request.Direccion, request.Alergias, request.Celular, request.FechaNacimiento, request.IdComuna);
             return paciente;
         }
     }

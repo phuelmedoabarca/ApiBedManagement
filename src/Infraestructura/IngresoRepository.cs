@@ -43,7 +43,28 @@ namespace Infraestructura
 
             if (!string.IsNullOrEmpty(rut))
             {
-                query = query.Where(x => x.Paciente.Rut.Documento.Contains(rut));
+                if (!rut.Contains("-") && !rut.Contains("."))
+                    query = query.Where(x => x.Paciente.Rut.Documento.ToString().Contains(rut.ToString()));
+                if (rut.Contains("."))
+                    rut = rut.Replace(".", "").ToUpper();
+                if (rut.Contains("-"))
+                {
+                    var rutParts = rut.Split('-');
+                    int documento = int.Parse(rutParts[0]);
+                    string digito = rutParts[1];
+                    if (string.IsNullOrEmpty(digito))
+                    {
+                        query = query.Where(x => x.Paciente.Rut.Documento == documento);
+                    }
+                    else
+                    {
+                        query = query.Where(x => x.Paciente.Rut.Documento == documento && x.Paciente.Rut.Digito == digito);
+                    }
+                }
+                else
+                {
+                    query = query.Where(x => x.Paciente.Rut.Documento.ToString().Contains(rut.ToString()));
+                }
             }
 
             if (!string.IsNullOrEmpty(nombre))
