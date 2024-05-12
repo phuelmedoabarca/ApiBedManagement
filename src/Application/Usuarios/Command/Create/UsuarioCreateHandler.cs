@@ -42,7 +42,7 @@ namespace Application.Usuarios.Command.Create
             if (request.Contrasena.Length < 6)
                 throw new BadRequestException("Contraseña debe tener minimo 6 caracteres.");
 
-            var usuarioRut = await _repository.GetByRutUsuario(rut.Documento);
+            var usuarioRut = await _repository.GetByRutUsuario(request.Rut);
             if(usuarioRut is not null)
                 throw new BadRequestException($"Usuario con el Rut: {request.Rut} ya existe.");
 

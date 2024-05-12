@@ -23,8 +23,12 @@ namespace Infraestructura
         }
         public async Task<Paciente?> GetByRutPaciente(string rut)
         {
+            rut = rut.Replace(".", "").ToUpper();
+            var rutParts = rut.Split('-');
+            int documento = int.Parse(rutParts[0]);
+            string digito = rutParts[1];
             var paciente = await _dataBase.Set<Paciente>()
-                            .SingleOrDefaultAsync(i => i.Rut.Documento == rut);
+                            .SingleOrDefaultAsync(i => i.Rut.Documento == documento && i.Rut.Digito == digito);
             return paciente;
         }
 

@@ -68,6 +68,8 @@ namespace Infraestructura
                 o.HasKey(x => x.IdPaciente);
                 o.Property(x => x.IdPaciente);
                 o.Property(x => x.Nombre);
+                o.Property(x => x.ApellidoPaterno);
+                o.Property(x => x.ApellidoPaterno);
                 o.Property(x => x.Sexo);
                 o.Property(x => x.Direccion);
                 o.Property(x => x.Alergias);
@@ -80,6 +82,10 @@ namespace Infraestructura
                 {
                     conf.Property(x => x.Documento).HasColumnName("Rut");
                 });
+                o.OwnsOne(e => e.Rut, conf =>
+                {
+                    conf.Property(x => x.Digito).HasColumnName("Dv");
+                });
             });
             modelBuilder.Entity<Usuario>(o =>
             {
@@ -89,6 +95,10 @@ namespace Infraestructura
                 o.OwnsOne(e => e.Rut, conf =>
                 {
                     conf.Property(x => x.Documento).HasColumnName("Rut");
+                });
+                o.OwnsOne(e => e.Rut, conf =>
+                {
+                    conf.Property(x => x.Digito).HasColumnName("Dv");
                 });
                 o.Property(x => x.Contrasena);
                 o.OwnsOne(e => e.Email, conf =>

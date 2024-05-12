@@ -27,6 +27,10 @@ namespace Application.Usuarios.Command.Set
             if (existRol == null)
                 throw new NotFoundException($"rol: {request.IdRol}");
 
+            var usuarioEmail = await _repository.GetByEmailUsuario(request.Email);
+            if (usuarioEmail is not null)
+                throw new BadRequestException($"Usuario con el email: {request.Email} ya existe.");
+
             if (request.Contrasena.Length < 6)
                 throw new BadRequestException("Contraseña debe tener minimo 6 caracteres.");
 
