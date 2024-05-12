@@ -41,10 +41,10 @@ namespace Infraestructura
                 .SingleOrDefaultAsync(i => i.Rut.Documento == documento && i.Rut.Digito == digito);
             return usuario;
         }
-        public async Task<Usuario?> GetByEmailUsuario(string enail)
+        public async Task<Usuario?> GetByEmailUsuario(string email)
         {
             var usuario = await _dataBase.Set<Usuario>()
-                .SingleOrDefaultAsync(i => i.Email.Email == enail);
+                .SingleOrDefaultAsync(i => i.Email.Email == email);
             return usuario;
         }
 

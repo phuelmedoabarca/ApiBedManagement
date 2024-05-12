@@ -28,7 +28,7 @@ namespace Application.Usuarios.Command.Set
                 throw new NotFoundException($"rol: {request.IdRol}");
 
             var usuarioEmail = await _repository.GetByEmailUsuario(request.Email);
-            if (usuarioEmail is not null && $"{rut.Documento}-{rut.Digito}" != request.Rut )
+            if (usuarioEmail is not null && $"{usuarioEmail.Rut.Documento}-{usuarioEmail.Rut.Digito}" != request.Rut )
                 throw new BadRequestException($"Usuario con el email: {request.Email} ya existe.");
 
             if (request.Contrasena.Length < 6)
