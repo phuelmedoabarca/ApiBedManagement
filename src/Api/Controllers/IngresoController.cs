@@ -3,8 +3,6 @@ using Application.Ingresos.Command.Set;
 using Application.Ingresos.Queries.GetByFiltersIngreso;
 using Application.Ingresos.Queries.GetByIdIngreso;
 using Application.Ingresos.Queries.GetList;
-using Application.Pacientes.Queries.GetByRutPaciente;
-using Application.Pacientes.Queries.GetList;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

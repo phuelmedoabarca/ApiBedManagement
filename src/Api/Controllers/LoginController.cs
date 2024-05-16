@@ -1,5 +1,4 @@
-﻿using Application.Pacientes.Command.Create;
-using Application.Usuarios.Command.Login;
+﻿using Application.Usuarios.Command.Login;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

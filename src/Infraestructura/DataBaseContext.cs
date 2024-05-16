@@ -46,6 +46,7 @@ namespace Infraestructura
                 o.Property(x => x.IdCama);
                 o.Property(x => x.Numero);
                 o.Property(x => x.Sexo);
+                //TODO: Relacion entre cama y sala por el id de la sala
                 o.HasOne(x => x.Sala)
                                 .WithMany()
                                 .HasForeignKey(x => x.IdSala);
@@ -78,6 +79,7 @@ namespace Infraestructura
                 o.Property(x => x.FechaModificacion);
                 o.Property(x => x.FechaNacimiento);
                 o.Property(x => x.IdComuna);
+                //TODO: Propiedad rut es compleja donde la propiedad documento se mepea con la columna rut de la BD
                 o.OwnsOne(e => e.Rut, conf =>
                 {
                     conf.Property(x => x.Documento).HasColumnName("Rut");
