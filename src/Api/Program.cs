@@ -30,15 +30,6 @@ builder.Services.AddDbContext<DataBaseContext>(options =>
 builder.Services.AddRepositories();
 builder.Services.AddHandlers();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAllOrigins", builder =>
-    {
-        builder.AllowAnyOrigin()
-               .AllowAnyHeader()
-               .AllowAnyMethod();
-    });
-});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -55,7 +46,6 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseCors("AllowAllOrigins");
 app.UseAuthentication();
 app.UseAuthorization();
 
